@@ -1,0 +1,78 @@
+name: seiya-sentinel-local
+
+# One local topology: api_zaSmaOlt remains the operational source and
+# OmniSentinel remains an independent consumer microservice.  Services use
+# Docker DNS internally; localhost is used only from the developer's browser.
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: omniSentinel_db
+      POSTGRES_USER: incident_user
+      POSTGRES_PASSWORD: local_dev_password
+    volumes:
+      - seiya_sentinel_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U incident_user -d omniSentinel_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+
+  rabbitmq:
+    image: rabbitmq:4-management-alpine
+    environment:
+      RABBITMQ_DEFAULT_USER: incident_user
+      RABBITMQ_DEFAULT_PASS: local_dev_rabbit_password
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+
+  api_zasmaolt:
+    build:
+      context: ./api_zaSmaOlt
+    env_file:
+      - ./api_zaSmaOlt/.env.local
+    environment:
+      DATABASE_URL: postgresql://incident_user:local_dev_password@postgres:5432/omniSentinel_db?schema=zasmaolt
+      OMNISENTINEL_API_URL: http://omni_sentinel:3000
+    ports:
+      - "127.0.0.1:3100:3010"
+    volumes:
+      - ./api_zaSmaOlt/data:/usr/src/app/data
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3010/health').then((response) => { if (!response.ok) process.exit(1) }).catch(() => process.exit(1))"]
+      interval: 15s
+      timeout: 5s
+      start_period: 30s
+      retries: 5
+
+  omni_sentinel:
+    build:
+      context: ./omniSentinel
+      dockerfile: docker/Dockerfile
+    env_file:
+      - ./omniSentinel/.env.local
+    environment:
+      DATABASE_URL: postgresql://incident_user:local_dev_password@postgres:5432/omniSentinel_db?schema=public
+      RABBITMQ_URL: amqp://incident_user:local_dev_rabbit_password@rabbitmq:5672
+      ZASMAOLT_API_URL: http://api_zasmaolt:3010
+      REPORT_STORAGE_PATH: /app/storage/reports
+    ports:
+      - "127.0.0.1:3101:3000"
+    volumes:
+      - ./omniSentinel/storage/reports:/app/storage/reports
+    depends_on:
+      postgres:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      api_zasmaolt:
+        condition: service_healthy
+
+volumes:
+  seiya_sentinel_postgres_data:

@@ -1,0 +1,266 @@
+#1 [internal] load local bake definitions
+#1 reading from stdin 1.26kB 0.4s done
+#1 DONE 0.4s
+
+#2 [api_zasmaolt internal] load build definition from Dockerfile
+#2 transferring dockerfile: 30B 0.0s
+#2 ...
+
+#3 [omni_sentinel internal] load build definition from Dockerfile
+#3 transferring dockerfile: 538B 0.3s done
+#3 DONE 0.9s
+
+#2 [api_zasmaolt internal] load build definition from Dockerfile
+#2 transferring dockerfile: 1.22kB 0.1s done
+#2 DONE 0.9s
+
+#4 [api_zasmaolt internal] load metadata for docker.io/library/node:20-bookworm-slim
+#4 ...
+
+#5 [omni_sentinel internal] load metadata for docker.io/library/node:24-alpine
+#5 DONE 0.6s
+
+#6 [omni_sentinel internal] load .dockerignore
+#6 transferring context:
+#6 transferring context: 224B 0.2s done
+#6 DONE 1.3s
+
+#4 [api_zasmaolt internal] load metadata for docker.io/library/node:20-bookworm-slim
+#4 ...
+
+#7 [omni_sentinel builder 1/6] FROM docker.io/library/node:24-alpine@sha256:50c8e8ca1d27439048670df5883f32d57cf81cff6233222c893fd0d9884cbd81
+#7 resolve docker.io/library/node:24-alpine@sha256:50c8e8ca1d27439048670df5883f32d57cf81cff6233222c893fd0d9884cbd81 0.0s done
+#7 DONE 0.1s
+
+#8 [omni_sentinel internal] load build context
+#8 ...
+
+#4 [api_zasmaolt internal] load metadata for docker.io/library/node:20-bookworm-slim
+#4 DONE 3.2s
+
+#8 [omni_sentinel internal] load build context
+#8 ...
+
+#9 [api_zasmaolt internal] load .dockerignore
+#9 transferring context: 134B 0.1s done
+#9 DONE 0.8s
+
+#8 [omni_sentinel internal] load build context
+#8 ...
+
+#10 [api_zasmaolt dependencies 1/5] FROM docker.io/library/node:20-bookworm-slim@sha256:2cf067cfed83d5ea958367df9f966191a942351a2df77d6f0193e162b5febfc0
+#10 resolve docker.io/library/node:20-bookworm-slim@sha256:2cf067cfed83d5ea958367df9f966191a942351a2df77d6f0193e162b5febfc0 0.1s done
+#10 DONE 0.1s
+
+#8 [omni_sentinel internal] load build context
+#8 ...
+
+#11 [api_zasmaolt dependencies 2/5] WORKDIR /usr/src/app
+#11 CACHED
+
+#12 [api_zasmaolt dependencies 3/5] RUN apt-get update     && apt-get install -y --no-install-recommends python3 make g++     && rm -rf /var/lib/apt/lists/*
+#12 CACHED
+
+#8 [omni_sentinel internal] load build context
+#8 transferring context: 902.10kB 1.6s done
+#8 DONE 2.1s
+
+#13 [api_zasmaolt internal] load build context
+#13 ...
+
+#14 [omni_sentinel builder 2/6] WORKDIR /app
+#14 CACHED
+
+#15 [omni_sentinel builder 3/6] COPY package*.json ./
+#15 CACHED
+
+#13 [api_zasmaolt internal] load build context
+#13 transferring context: 4.43MB 3.8s done
+#13 DONE 4.2s
+
+#16 [omni_sentinel builder 4/6] RUN npm ci
+#16 34.08 npm warn deprecated rimraf@2.7.1: Rimraf versions prior to v4 are no longer supported
+#16 34.97 npm warn deprecated lodash.isequal@4.5.0: This package is deprecated. Use require('node:util').isDeepStrictEqual instead.
+#16 43.46 npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+#16 79.36 npm warn deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+#16 81.66 npm warn deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+#16 81.69 npm warn deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+#16 81.92 npm warn deprecated fstream@1.0.12: This package is no longer supported.
+#16 101.3 npm warn deprecated uuid@8.3.2: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
+#16 105.1 npm warn deprecated glob@10.5.0: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+#16 ...
+
+#17 [api_zasmaolt dependencies 4/5] COPY package.json package-lock.json ./
+#17 DONE 0.1s
+
+#18 [api_zasmaolt dependencies 5/5] RUN npm_config_build_from_source=true npm ci --omit=dev     && node -e "require('sqlite3'); console.log('sqlite3 dependency verified')"     && npm cache clean --force
+#18 8.391 npm warn deprecated prebuild-install@7.1.3: No longer maintained. Please contact the author of the relevant native addon; alternatives are available.
+#18 ...
+
+#19 [omni_sentinel production 4/8] RUN npm ci --omit=dev
+#19 16.34 npm warn deprecated rimraf@2.7.1: Rimraf versions prior to v4 are no longer supported
+#19 19.55 npm warn deprecated lodash.isequal@4.5.0: This package is deprecated. Use require('node:util').isDeepStrictEqual instead.
+#19 24.52 npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+#19 30.39 npm warn deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+#19 30.44 npm warn deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+#19 30.52 npm warn deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+#19 31.23 npm warn deprecated fstream@1.0.12: This package is no longer supported.
+#19 40.73 npm warn deprecated uuid@8.3.2: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
+#19 ...
+
+#16 [omni_sentinel builder 4/6] RUN npm ci
+#16 166.8 npm warn deprecated eslint@9.39.5: This version is no longer supported. Please see https://eslint.org/version-support for other options.
+#16 ...
+
+#19 [omni_sentinel production 4/8] RUN npm ci --omit=dev
+#19 412.2 
+#19 412.2 added 361 packages, and audited 362 packages in 7m
+#19 412.2 
+#19 412.2 68 packages are looking for funding
+#19 412.2   run `npm fund` for details
+#19 412.9 
+#19 412.9 5 vulnerabilities (2 moderate, 3 high)
+#19 412.9 
+#19 412.9 To address all issues (including breaking changes), run:
+#19 412.9   npm audit fix --force
+#19 412.9 
+#19 412.9 Run `npm audit` for details.
+#19 413.0 npm warn install-scripts 6 packages have install scripts not yet covered by allowScripts:
+#19 413.0 npm warn install-scripts   @prisma/client@6.19.3 (postinstall: node scripts/postinstall.js)
+#19 413.0 npm warn install-scripts   @prisma/engines@6.19.3 (postinstall: node scripts/postinstall.js)
+#19 413.0 npm warn install-scripts   @scarf/scarf@1.4.0 (postinstall: node ./report.js)
+#19 413.0 npm warn install-scripts   argon2@0.44.0 (install: cross-env ZERO_AR_DATE=1 node-gyp-build)
+#19 413.0 npm warn install-scripts   prisma@6.19.3 (preinstall: node scripts/preinstall-entry.js)
+#19 413.0 npm warn install-scripts   puppeteer@25.10.0 (postinstall: node install.mjs)
+#19 413.0 npm warn install-scripts
+#19 413.0 npm warn install-scripts Run `npm install-scripts ls` to review, or `npm install-scripts approve <pkg>` to allow.
+#19 413.2 npm notice
+#19 413.2 npm notice New major version of npm available! 11.19.0 -> 12.0.2
+#19 413.2 npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.0.2
+#19 413.2 npm notice To update run: npm install -g npm@12.0.2
+#19 413.2 npm notice
+#19 DONE 421.0s
+
+#16 [omni_sentinel builder 4/6] RUN npm ci
+#16 547.2 
+#16 547.2 added 820 packages, and audited 821 packages in 9m
+#16 547.2 
+#16 547.2 161 packages are looking for funding
+#16 547.2   run `npm fund` for details
+#16 548.0 
+#16 548.0 5 vulnerabilities (2 moderate, 3 high)
+#16 548.0 
+#16 548.0 To address all issues (including breaking changes), run:
+#16 548.0   npm audit fix --force
+#16 548.0 
+#16 548.0 Run `npm audit` for details.
+#16 548.0 npm warn install-scripts 8 packages have install scripts not yet covered by allowScripts:
+#16 548.0 npm warn install-scripts   @parcel/watcher@2.6.0 (install: node scripts/build-from-source.js)
+#16 548.0 npm warn install-scripts   @prisma/client@6.19.3 (postinstall: node scripts/postinstall.js)
+#16 548.0 npm warn install-scripts   @prisma/engines@6.19.3 (postinstall: node scripts/postinstall.js)
+#16 548.0 npm warn install-scripts   @scarf/scarf@1.4.0 (postinstall: node ./report.js)
+#16 548.0 npm warn install-scripts   argon2@0.44.0 (install: cross-env ZERO_AR_DATE=1 node-gyp-build)
+#16 548.0 npm warn install-scripts   prisma@6.19.3 (preinstall: node scripts/preinstall-entry.js)
+#16 548.0 npm warn install-scripts   puppeteer@25.10.0 (postinstall: node install.mjs)
+#16 548.0 npm warn install-scripts   unrs-resolver@1.12.2 (postinstall: node postinstall.js)
+#16 548.0 npm warn install-scripts
+#16 548.0 npm warn install-scripts Run `npm install-scripts ls` to review, or `npm install-scripts approve <pkg>` to allow.
+#16 548.2 npm notice
+#16 548.2 npm notice New major version of npm available! 11.19.0 -> 12.0.2
+#16 548.2 npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.0.2
+#16 548.2 npm notice To update run: npm install -g npm@12.0.2
+#16 548.2 npm notice
+#16 DONE 554.5s
+
+#18 [api_zasmaolt dependencies 5/5] RUN npm_config_build_from_source=true npm ci --omit=dev     && node -e "require('sqlite3'); console.log('sqlite3 dependency verified')"     && npm cache clean --force
+#18 ...
+
+#20 [omni_sentinel builder 5/6] COPY . .
+#20 DONE 41.4s
+
+#18 [api_zasmaolt dependencies 5/5] RUN npm_config_build_from_source=true npm ci --omit=dev     && node -e "require('sqlite3'); console.log('sqlite3 dependency verified')"     && npm cache clean --force
+#18 ...
+
+#21 [omni_sentinel builder 6/6] RUN npm run prisma:generate && npm run build
+#21 13.99 
+#21 13.99 > api-incident-report@0.1.0 prisma:generate
+#21 13.99 > prisma generate
+#21 13.99 
+#21 35.57 warn The configuration property `package.json#prisma` is deprecated and will be removed in Prisma 7. Please migrate to a Prisma config file (e.g., `prisma.config.ts`).
+#21 35.57 For more information, see: https://pris.ly/prisma-config
+#21 35.57 
+#21 49.22 Prisma schema loaded from prisma/schema.prisma
+#21 77.31 
+#21 77.31 ✔ Generated Prisma Client (v6.19.3) to ./node_modules/@prisma/client in 13.84s
+#21 77.31 
+#21 77.31 Start by importing your Prisma Client (See: https://pris.ly/d/importing-client)
+#21 77.31 
+#21 77.31 Tip: Interested in query caching in just a few lines of code? Try Accelerate today! https://pris.ly/tip-3-accelerate
+#21 77.31 
+#21 96.95 
+#21 96.95 > api-incident-report@0.1.0 build
+#21 96.95 > prisma generate && tsc -p tsconfig.build.json --incremental false
+#21 96.95 
+#21 134.0 warn The configuration property `package.json#prisma` is deprecated and will be removed in Prisma 7. Please migrate to a Prisma config file (e.g., `prisma.config.ts`).
+#21 134.0 For more information, see: https://pris.ly/prisma-config
+#21 134.0 
+#21 158.2 Prisma schema loaded from prisma/schema.prisma
+#21 182.5 
+#21 182.5 ✔ Generated Prisma Client (v6.19.3) to ./node_modules/@prisma/client in 10.11s
+#21 182.5 
+#21 182.5 Start by importing your Prisma Client (See: https://pris.ly/d/importing-client)
+#21 182.5 
+#21 182.5 Tip: Need your database queries to be 1000x faster? Accelerate offers you that and more: https://pris.ly/tip-2-accelerate
+#21 182.5 
+#21 182.6 ┌─────────────────────────────────────────────────────────┐
+#21 182.6 │  Update available 6.19.3 -> 8.0.0-rc.15                 │
+#21 182.6 │                                                         │
+#21 182.6 │  This is a major update - please follow the guide at    │
+#21 182.6 │  https://pris.ly/d/major-version-upgrade                │
+#21 182.6 │                                                         │
+#21 182.6 │  Run the following to update                            │
+#21 182.6 │    npm i --save-dev prisma@latest                       │
+#21 182.6 │    npm i @prisma/client@latest                          │
+#21 182.6 └─────────────────────────────────────────────────────────┘
+#21 DONE 267.7s
+
+#18 [api_zasmaolt dependencies 5/5] RUN npm_config_build_from_source=true npm ci --omit=dev     && node -e "require('sqlite3'); console.log('sqlite3 dependency verified')"     && npm cache clean --force
+#18 ...
+
+#22 [omni_sentinel production 5/8] COPY --from=builder /app/dist ./dist
+#22 DONE 4.3s
+
+#18 [api_zasmaolt dependencies 5/5] RUN npm_config_build_from_source=true npm ci --omit=dev     && node -e "require('sqlite3'); console.log('sqlite3 dependency verified')"     && npm cache clean --force
+#18 ...
+
+#23 [omni_sentinel production 6/8] COPY --from=builder /app/prisma ./prisma
+#23 DONE 0.2s
+
+#18 [api_zasmaolt dependencies 5/5] RUN npm_config_build_from_source=true npm ci --omit=dev     && node -e "require('sqlite3'); console.log('sqlite3 dependency verified')"     && npm cache clean --force
+#18 ...
+
+#24 [omni_sentinel production 7/8] COPY --from=builder /app/public ./public
+#24 DONE 0.2s
+
+#18 [api_zasmaolt dependencies 5/5] RUN npm_config_build_from_source=true npm ci --omit=dev     && node -e "require('sqlite3'); console.log('sqlite3 dependency verified')"     && npm cache clean --force
+#18 ...
+
+#25 [omni_sentinel production 8/8] RUN npx prisma generate && mkdir -p /app/storage/reports
+#25 9.659 warn The configuration property `package.json#prisma` is deprecated and will be removed in Prisma 7. Please migrate to a Prisma config file (e.g., `prisma.config.ts`).
+#25 9.659 For more information, see: https://pris.ly/prisma-config
+#25 9.659 
+#25 15.99 Prisma schema loaded from prisma/schema.prisma
+#25 26.99 
+#25 26.99 ✔ Generated Prisma Client (v6.19.3) to ./node_modules/@prisma/client in 2.18s
+#25 26.99 
+#25 26.99 Start by importing your Prisma Client (See: https://pris.ly/d/importing-client)
+#25 26.99 
+#25 26.99 Tip: Need your database queries to be 1000x faster? Accelerate offers you that and more: https://pris.ly/tip-2-accelerate
+#25 26.99 
+#25 DONE 28.4s
+
+#18 [api_zasmaolt dependencies 5/5] RUN npm_config_build_from_source=true npm ci --omit=dev     && node -e "require('sqlite3'); console.log('sqlite3 dependency verified')"     && npm cache clean --force
+#18 ...
+
+#26 [omni_sentinel] exporting to image
+#26 exporting layers
