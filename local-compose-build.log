@@ -264,3 +264,101 @@
 
 #26 [omni_sentinel] exporting to image
 #26 exporting layers
+#26 ...
+
+#18 [api_zasmaolt dependencies 5/5] RUN npm_config_build_from_source=true npm ci --omit=dev     && node -e "require('sqlite3'); console.log('sqlite3 dependency verified')"     && npm cache clean --force
+#18 993.3 
+#18 993.3 added 230 packages, and audited 231 packages in 17m
+#18 993.3 
+#18 993.3 54 packages are looking for funding
+#18 993.3   run `npm fund` for details
+#18 993.5 
+#18 993.5 6 vulnerabilities (3 moderate, 3 high)
+#18 993.5 
+#18 993.5 To address issues that do not require attention, run:
+#18 993.5   npm audit fix
+#18 993.5 
+#18 993.5 To address all issues (including breaking changes), run:
+#18 993.5   npm audit fix --force
+#18 993.5 
+#18 993.5 Run `npm audit` for details.
+#18 993.6 npm notice
+#18 993.6 npm notice New major version of npm available! 10.8.2 -> 12.0.2
+#18 993.6 npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.0.2
+#18 993.6 npm notice To update run: npm install -g npm@12.0.2
+#18 993.6 npm notice
+#18 994.7 sqlite3 dependency verified
+#18 995.6 npm warn using --force Recommended protections disabled.
+#18 DONE 1000.1s
+
+#26 [omni_sentinel] exporting to image
+#26 ...
+
+#11 [api_zasmaolt dependencies 2/5] WORKDIR /usr/src/app
+#11 CACHED
+
+#27 [api_zasmaolt runtime 3/6] COPY --from=dependencies --chown=node:node /usr/src/app/node_modules ./node_modules
+#27 DONE 8.1s
+
+#26 [omni_sentinel] exporting to image
+#26 ...
+
+#28 [api_zasmaolt runtime 4/6] COPY --chown=node:node package.json package-lock.json ./
+#28 DONE 0.4s
+
+#26 [omni_sentinel] exporting to image
+#26 ...
+
+#29 [api_zasmaolt runtime 5/6] COPY --chown=node:node src ./src
+#29 DONE 0.5s
+
+#26 [omni_sentinel] exporting to image
+#26 ...
+
+#30 [api_zasmaolt runtime 6/6] COPY --chown=node:node data ./data
+#30 DONE 0.3s
+
+#26 [omni_sentinel] exporting to image
+#26 ...
+
+#31 [api_zasmaolt] exporting to image
+#31 exporting layers
+#31 exporting layers 6.0s done
+#31 exporting manifest sha256:6dde7e9fbb5b2f60023ac31de333d172a7644481654525f191d9048aded71d3c
+#31 exporting manifest sha256:6dde7e9fbb5b2f60023ac31de333d172a7644481654525f191d9048aded71d3c 0.5s done
+#31 exporting config sha256:6b00880554ffd2203d5a05685576b9afe48461c080eb3b12c6496e876c6b1c7e
+#31 exporting config sha256:6b00880554ffd2203d5a05685576b9afe48461c080eb3b12c6496e876c6b1c7e 0.0s done
+#31 exporting attestation manifest sha256:4ba9c9cf254e9e9e77fcefbc19d6f67e996c4c9f2e6a35c2c2e75919a4d0683b
+#31 exporting attestation manifest sha256:4ba9c9cf254e9e9e77fcefbc19d6f67e996c4c9f2e6a35c2c2e75919a4d0683b 0.2s done
+#31 exporting manifest list sha256:b8c8c12eb77eee9ab3928cad647ced932bcdf8b51782ccc651b9a1c77280e665
+#31 exporting manifest list sha256:b8c8c12eb77eee9ab3928cad647ced932bcdf8b51782ccc651b9a1c77280e665 0.2s done
+#31 naming to docker.io/library/seiya-sentinel-local-api_zasmaolt:latest
+#31 naming to docker.io/library/seiya-sentinel-local-api_zasmaolt:latest 0.9s done
+#31 unpacking to docker.io/library/seiya-sentinel-local-api_zasmaolt:latest
+#31 unpacking to docker.io/library/seiya-sentinel-local-api_zasmaolt:latest 9.5s done
+#31 DONE 17.4s
+
+#26 [omni_sentinel] exporting to image
+#26 ...
+
+#32 [api_zasmaolt] resolving provenance for metadata file
+#32 DONE 0.5s
+
+#26 [omni_sentinel] exporting to image
+#26 exporting layers 192.7s done
+#26 exporting manifest sha256:e8ea5f9718b45123d60d150492ba4a6d88b23afca6bec87935c4c3ed7c9a135f
+#26 exporting manifest sha256:e8ea5f9718b45123d60d150492ba4a6d88b23afca6bec87935c4c3ed7c9a135f 0.3s done
+#26 exporting config sha256:42d263d97ef90f7ed0eae5bb049752df830b4144e4104a88a0543c129d7fdd2f
+#26 exporting config sha256:42d263d97ef90f7ed0eae5bb049752df830b4144e4104a88a0543c129d7fdd2f 0.3s done
+#26 exporting attestation manifest sha256:e2759a44fe9e2a85189100fd92689145d2fc71f459627039091b32d15d73ceda
+#26 exporting attestation manifest sha256:e2759a44fe9e2a85189100fd92689145d2fc71f459627039091b32d15d73ceda 0.8s done
+#26 exporting manifest list sha256:873c29fcb5dadfdd39cabd43225d93201babc4e44abbf2e18bf17b7ee45e21bd
+#26 exporting manifest list sha256:873c29fcb5dadfdd39cabd43225d93201babc4e44abbf2e18bf17b7ee45e21bd 0.2s done
+#26 naming to docker.io/library/seiya-sentinel-local-omni_sentinel:latest
+#26 naming to docker.io/library/seiya-sentinel-local-omni_sentinel:latest 0.1s done
+#26 unpacking to docker.io/library/seiya-sentinel-local-omni_sentinel:latest
+#26 unpacking to docker.io/library/seiya-sentinel-local-omni_sentinel:latest 218.6s done
+#26 DONE 414.2s
+
+#33 [omni_sentinel] resolving provenance for metadata file
+#33 DONE 1.5s

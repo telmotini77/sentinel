@@ -1,2 +1,17 @@
  Image seiya-sentinel-local-api_zasmaolt Building 
  Image seiya-sentinel-local-omni_sentinel Building 
+ Image seiya-sentinel-local-api_zasmaolt Built 
+ Image seiya-sentinel-local-omni_sentinel Built 
+ Network seiya-sentinel-local_default Creating 
+ Network seiya-sentinel-local_default Creating 
+ Volume seiya-sentinel-local_seiya_sentinel_postgres_data Creating 
+ Volume seiya-sentinel-local_seiya_sentinel_postgres_data Creating 
+ Volume seiya-sentinel-local_seiya_sentinel_postgres_data Created 
+ Volume seiya-sentinel-local_seiya_sentinel_postgres_data Created 
+ Network seiya-sentinel-local_default Created 
+ Network seiya-sentinel-local_default Created 
+ Container seiya-sentinel-local-rabbitmq-1 Creating 
+ Container seiya-sentinel-local-postgres-1 Creating 
+ service:postgres:1 Error response from daemon: Conflict. The container name "/seiya-sentinel-local-postgres-1" is already in use by container "a5d771afb0d68d7ba8bd0d76bab8da4610422599aa1184d1bd8d23c99e57e66a". You have to remove (or rename) that container to be able to reuse that name. 
+ Container seiya-sentinel-local-api_zasmaolt-1 Creating 
+Error response from daemon: Conflict. The container name "/seiya-sentinel-local-postgres-1" is already in use by container "a5d771afb0d68d7ba8bd0d76bab8da4610422599aa1184d1bd8d23c99e57e66a". You have to remove (or rename) that container to be able to reuse that name.
