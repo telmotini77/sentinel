@@ -1,0 +1,88 @@
+name: seiya-sentinel
+
+# Production topology for one Docker host. The applications use Docker DNS,
+# never localhost or a second Compose project/network.
+services:
+  postgres:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:?Set POSTGRES_DB in .env.server}
+      POSTGRES_USER: ${POSTGRES_USER:?Set POSTGRES_USER in .env.server}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env.server}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+
+  rabbitmq:
+    image: rabbitmq:4-management-alpine
+    restart: unless-stopped
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER:?Set RABBITMQ_USER in .env.server}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD:?Set RABBITMQ_PASSWORD in .env.server}
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+
+  api_zasmaolt:
+    build:
+      context: ./api_zaSmaOlt
+    restart: unless-stopped
+    env_file:
+      - ./api_zaSmaOlt/.env
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}?schema=zasmaolt
+      ZASMAOLT_DATABASE_SCHEMA: zasmaolt
+      PUBLIC_URL: ${MAP_PUBLIC_URL:-http://seiya.futurity.com.ec}
+      MAP_ACCESS_COOKIE_SECURE: ${MAP_ACCESS_COOKIE_SECURE:-false}
+      OMNISENTINEL_ENABLED: "false"
+      OMNISENTINEL_API_URL: http://omni_sentinel:3000
+    ports:
+      - "127.0.0.1:${API_HOST_PORT:-3010}:3010"
+    volumes:
+      - ./api_zaSmaOlt/data:/usr/src/app/data
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3010/health').then((response) => { if (!response.ok) process.exit(1) }).catch(() => process.exit(1))"]
+      interval: 15s
+      timeout: 5s
+      start_period: 30s
+      retries: 5
+
+  omni_sentinel:
+    build:
+      context: ./omniSentinel
+      dockerfile: docker/Dockerfile
+    restart: unless-stopped
+    env_file:
+      - ./omniSentinel/.env
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}?schema=public
+      RABBITMQ_URL: amqp://${RABBITMQ_USER}:${RABBITMQ_PASSWORD}@rabbitmq:5672
+      ZASMAOLT_API_URL: http://api_zasmaolt:3010
+      REPORT_STORAGE_PATH: /app/storage/reports
+    ports:
+      - "${OMNI_BIND_HOST:-10.101.2.11}:${OMNI_HOST_PORT:-3000}:3000"
+    volumes:
+      - ./omniSentinel/storage/reports:/app/storage/reports
+    depends_on:
+      postgres:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      api_zasmaolt:
+        condition: service_healthy
+
+volumes:
+  postgres_data:
+  rabbitmq_data:
